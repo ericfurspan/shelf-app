@@ -22,7 +22,9 @@ const styles = theme => ({
     left: '50%',
     transform: 'translate(-50%, -50%)',
     overflow: 'scroll',
-    [theme.breakpoints.down('md')]: {
+    minHeight: '30%',
+    maxHeight: '75%',
+    [theme.breakpoints.down('sm')]: {
       width: '80%',
     },
     [theme.breakpoints.up('lg')]: {

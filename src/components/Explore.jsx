@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Nav from './Nav';
 import BooksGrid from './BooksGrid';
 import { addBook } from '../redux/actions';
+import stockBookImg from '../static/img/defaultBook.png';
 
 const styles = {
   root: {
@@ -27,15 +28,15 @@ class Explore extends React.Component {
 
     const formattedResults = searchResults && searchResults.map(b => ({
       title: b.volumeInfo.title,
-      author: b.volumeInfo.authors[0],
+      author: b.volumeInfo.authors ? b.volumeInfo.authors[0] : 'No Author Listed',
       description: b.volumeInfo.description || b.volumeInfo.subtitle,
-      image_link: b.volumeInfo.imageLinks.thumbnail,
+      image_link: b.volumeInfo.imageLinks ? b.volumeInfo.imageLinks.thumbnail : stockBookImg,
       isbn: b.isbn,
     }));
 
     return (
       <div className={classes.root}>
-        <Nav logout={this.logout} styleTheme={styleTheme} />
+        <Nav styleTheme={styleTheme} />
         {formattedResults ? (
           <BooksGrid
             data={formattedResults}

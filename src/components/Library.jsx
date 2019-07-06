@@ -7,7 +7,6 @@ import {
   getSavedBooks,
   removeBook,
   navigate,
-  logout,
 } from '../redux/actions';
 
 const styles = {
@@ -27,11 +26,6 @@ class Library extends React.Component {
     dispatch(removeBook(book));
   }
 
-  logout = () => {
-    const { dispatch } = this.props;
-    dispatch(logout());
-  }
-
   navigate = (route) => {
     const { dispatch } = this.props;
     dispatch(navigate(route));
@@ -47,7 +41,7 @@ class Library extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Nav logout={this.logout} styleTheme={styleTheme} />
+        <Nav styleTheme={styleTheme} />
         <BooksGrid
           data={savedBooks}
           removeBookFromShelf={this.removeBookFromShelf}

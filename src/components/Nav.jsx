@@ -18,7 +18,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ExitIcon from '@material-ui/icons/ExitToApp';
 import BookmarkCollection from '@material-ui/icons/CollectionsBookmark';
 import { connect } from 'react-redux';
-import { bookSearch, navigate, toggleStyleTheme } from '../redux/actions';
+import {
+  bookSearch,
+  navigate,
+  toggleStyleTheme,
+  logout,
+} from '../redux/actions';
 
 const styles = theme => ({
   root: {
@@ -99,24 +104,6 @@ class Nav extends React.Component {
     });
   };
 
-  updateStyleTheme = () => {
-    const { dispatch } = this.props;
-    dispatch(toggleStyleTheme());
-  }
-
-  navigate = (route) => {
-    const { dispatch } = this.props;
-    dispatch(navigate(route));
-  }
-
-  handleSearch = (e) => {
-    e.preventDefault();
-
-    const { dispatch } = this.props;
-    const { search } = this.state;
-    dispatch(bookSearch(search));
-  }
-
   updateSearch = (e) => {
     this.setState({
       search: e.target.value,
@@ -124,20 +111,26 @@ class Nav extends React.Component {
   }
 
   render() {
-    const { classes, logout, styleTheme } = this.props;
+    const {
+      classes,
+      styleTheme,
+      _logout,
+      _navigate,
+      handleSearch,
+    } = this.props;
     const { drawerOpen, search } = this.state;
 
     const sideList = (
       <div className={classes.list}>
         <List>
-          <ListItem button key="My Library" onClick={() => this.navigate('/library')}>
+          <ListItem button key="My Library" onClick={() => _navigate('/library')}>
             <ListItemIcon><BookmarkCollection /></ListItemIcon>
             <ListItemText primary="My Library" />
           </ListItem>
         </List>
         <Divider />
         <List>
-          {/* <ListItem button>
+          <ListItem button>
             <FormControlLabel
               classes={{ label: classes.switchLabel }}
               control={(
@@ -148,9 +141,9 @@ class Nav extends React.Component {
                 )}
               label="Dark Mode"
             />
-          </ListItem> */}
+          </ListItem>
           {['Logout'].map(text => (
-            <ListItem button key={text} onClick={() => logout()}>
+            <ListItem button key={text} onClick={() => _logout()}>
               <ListItemIcon>
                 <ExitIcon color="error" />
               </ListItemIcon>
@@ -176,7 +169,7 @@ class Nav extends React.Component {
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
-              <form onSubmit={this.handleSearch} noValidate autoComplete="off">
+              <form onSubmit={e => handleSearch(e, search)} noValidate autoComplete="off">
                 <InputBase
                   placeholder="Find books"
                   onChange={this.updateSearch}
@@ -205,4 +198,14 @@ class Nav extends React.Component {
   }
 }
 
-export default withStyles(styles)(connect()(Nav));
+const mapDispatchToProps = dispatch => ({
+  _navigate: route => dispatch(navigate(route)),
+  _logout: () => dispatch(logout()),
+  updateStyleTheme: () => dispatch(toggleStyleTheme()),
+  handleSearch: (e, search) => {
+    e.preventDefault();
+    dispatch(bookSearch(search));
+  },
+});
+
+export default withStyles(styles)(connect(null, mapDispatchToProps)(Nav));
