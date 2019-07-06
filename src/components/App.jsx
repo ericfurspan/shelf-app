@@ -70,9 +70,9 @@ class App extends React.Component {
         <MuiThemeProvider theme={theme}>
           {notificationSnackbar}
           <Switch>
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/explore" component={Explore} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route path="/explore" component={Explore} />
             <ProtectedRoute isLoggedIn={isLoggedIn} path="/library" component={Library} />
             <Route path="/" render={() => <Redirect to="/library" />} />
           </Switch>
