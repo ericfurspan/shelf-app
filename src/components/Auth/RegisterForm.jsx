@@ -34,7 +34,7 @@ const styles = theme => ({
 
 function RegisterForm(props) {
   const {
-    values: { fullname, username, password },
+    values: { name, username, password },
     errors,
     touched,
     status,
@@ -45,17 +45,17 @@ function RegisterForm(props) {
     authLoading,
   } = props;
 
-  const change = (name, e) => {
+  const change = (value, e) => {
     e.persist();
     handleChange(e);
-    setFieldTouched(name, true, false);
+    setFieldTouched(value, true, false);
   };
 
   const { classes } = props;
 
   return (
     <Card className={classes.card}>
-      <CardHeader className={classes.header} title="Registration" action={<Link to="/login">Login</Link>} classes={{ title: classes.title }} />
+      <CardHeader className={classes.header} title="Sign Up" action={<Link to="/login">Login</Link>} classes={{ title: classes.title }} />
       <CardContent>
         {dirty && <Typography variant="body1" align="center" color="error">{status}</Typography>}
         {authLoading && (
@@ -65,14 +65,14 @@ function RegisterForm(props) {
         )}
         <Form className={classes.form}>
           <TextField
-            id="fullname-input"
-            name="fullname"
-            label="Full Name"
+            id="name-input"
+            name="name"
+            label="Name"
             className={classes.textField}
-            helperText={touched.fullname ? errors.fullname : ''}
-            error={touched.fullname && Boolean(errors.fullname)}
-            onChange={e => change('fullname', e)}
-            value={fullname}
+            helperText={touched.name ? errors.name : ''}
+            error={touched.name && Boolean(errors.name)}
+            onChange={e => change('name', e)}
+            value={name}
             margin="normal"
           />
           <br />

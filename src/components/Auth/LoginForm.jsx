@@ -58,7 +58,7 @@ function LoginForm(props) {
 
   return (
     <Card className={classes.card}>
-      <CardHeader className={classes.header} title="Login" action={<Link to="/register">Register</Link>} classes={{ title: classes.title }} />
+      <CardHeader className={classes.header} title="Login" action={<Link to="/register">Sign Up</Link>} classes={{ title: classes.title }} />
       <CardContent>
         {dirty && <Typography variant="body1" align="center" color="error">{status}</Typography>}
         {authLoading && (

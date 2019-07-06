@@ -27,7 +27,7 @@ export default function reducer(state = initialState, action) {
       return Object.assign({}, state, {
         authLoading: false,
         error: {
-          status: action.status,
+          status: action.code,
           message: action.message,
         },
         isLoading: false,
@@ -35,7 +35,7 @@ export default function reducer(state = initialState, action) {
     case 'API_ERROR':
       return Object.assign({}, state, {
         error: {
-          status: action.status,
+          status: action.code,
           message: action.message,
         },
         notification: {

@@ -14,8 +14,8 @@ const styles = () => ({
 });
 
 const validationSchema = Yup.object({
-  fullname: Yup.string('Enter your Full name')
-    .required('Full name is required'),
+  name: Yup.string('Enter your Name')
+    .required('Name is required'),
   username: Yup.string('Enter your Username')
     .required('Username is required'),
   password: Yup.string('Enter your Password')
@@ -33,7 +33,7 @@ class Register extends React.Component {
     const { authLoading } = this.props;
 
     const initialValues = {
-      fullname: '', username: '', password: '',
+      name: '', username: '', password: '',
     };
 
     return (

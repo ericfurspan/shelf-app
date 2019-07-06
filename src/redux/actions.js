@@ -55,14 +55,14 @@ export const setAuthToken = token => ({
   type: ActionTypes.SET_AUTH_TOKEN,
   token,
 });
-export const authError = (status, message) => ({
+export const authError = (code, message) => ({
   type: ActionTypes.AUTH_ERROR,
-  status,
+  code,
   message,
 });
-export const apiError = (status, message) => ({
+export const apiError = (code, message) => ({
   type: ActionTypes.API_ERROR,
-  status,
+  code,
   message,
 });
 export const toggleStyleTheme = theme => ({
@@ -126,7 +126,8 @@ export const registerUser = (fields, actions) => async (dispatch) => {
     await axios.post(
       `${process.env.REACT_APP_API_BASE_URL}/users`,
       JSON.stringify({
-        fullname: fields.fullname,
+        firstName: fields.name.split(' ')[0],
+        lastName: fields.name.split(' ')[1],
         username: fields.username,
         password: fields.password,
       }),
@@ -138,10 +139,9 @@ export const registerUser = (fields, actions) => async (dispatch) => {
     dispatch(registrationSuccess());
     dispatch(login(fields, actions));
   } catch (e) {
-    const { status } = e.response;
-    const message = 'Failed to register';
+    const { code, message } = e.response.data;
     actions.setStatus(message);
-    dispatch(authError(status, message));
+    dispatch(authError(code, message));
   }
 };
 
