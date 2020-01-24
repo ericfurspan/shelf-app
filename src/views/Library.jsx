@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import Nav from './Nav';
-import BooksGrid from './BooksGrid';
+import BooksGrid from '../components/BooksGrid';
 import {
   getSavedBooks,
   removeBook,
@@ -43,9 +43,9 @@ class Library extends React.Component {
       <div className={classes.root}>
         <Nav styleTheme={styleTheme} />
         <BooksGrid
-          data={savedBooks}
+          books={savedBooks}
           removeBookFromShelf={this.removeBookFromShelf}
-          page="library"
+          page="Library"
           isLoading={isLoading}
         />
       </div>

@@ -7,16 +7,16 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { withStyles } from '@material-ui/core/styles';
-import BookModal from './BookModal';
-
+import BookModal from '../views/BookModal';
+import Spinner from './Spinner';
 
 const styles = {
   root: {
     flexGrow: 1,
     marginTop: 20,
     padding: '0px 20px',
+    justifyContent: 'flex-end',
   },
   card: {
     maxWidth: 350,
@@ -46,7 +46,7 @@ class BooksGrid extends React.Component {
     const {
       isLoading,
       classes,
-      data,
+      books,
       removeBookFromShelf,
       addBookToShelf,
       page,
@@ -54,16 +54,7 @@ class BooksGrid extends React.Component {
 
     if (isLoading) {
       return (
-        <div
-          style={{
-            position: 'absolute',
-            left: '50%',
-            top: '50%',
-            transform: 'translate(-50%, -50%)',
-          }}
-        >
-          <CircularProgress size={50} color="secondary" />
-        </div>
+        <Spinner />
       );
     }
     const { selectedBook } = this.state;
@@ -79,7 +70,7 @@ class BooksGrid extends React.Component {
           page={page}
         />
         <Grid spacing={2} container>
-          {data && data.map((book, index) => (
+          {books && books.map((book, index) => (
             <Zoom
               in
               timeout={1000}
@@ -94,7 +85,7 @@ class BooksGrid extends React.Component {
                       image={book.image_link}
                       title={book.title}
                     />
-                    <CardContent className={classes.content}>
+                    <CardContent>
                       <Typography variant="h5" component="h2">
                         {book.title}
                       </Typography>
@@ -109,8 +100,9 @@ class BooksGrid extends React.Component {
                   </div>
                   <CardActions>
                     <Button
-                      size="medium"
-                      color="secondary"
+                      variant="outlined"
+                      size="small"
+                      color="primary"
                       onClick={() => this.selectBook(book)}
                     >
                       View Book

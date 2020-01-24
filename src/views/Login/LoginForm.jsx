@@ -8,8 +8,9 @@ import CardContent from '@material-ui/core/CardContent';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CardHeader from '@material-ui/core/CardHeader';
 import TextField from '@material-ui/core/TextField';
-import { Link } from 'react-router-dom';
-import CustomButton from '../Button';
+import { Link as RouterLink } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
+import CustomButton from '../../components/Button';
 
 const styles = theme => ({
   card: {
@@ -19,16 +20,12 @@ const styles = theme => ({
   form: {
     textAlign: 'center',
   },
-  header: {
-    backgroundColor: theme.palette.primary.main,
-  },
   errorMessage: {
-    color: 'red',
     textAlign: 'center',
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+    marginLeft: theme.spacing(),
+    marginRight: theme.spacing(),
     width: 200,
   },
   pos: {
@@ -58,7 +55,7 @@ function LoginForm(props) {
 
   return (
     <Card className={classes.card}>
-      <CardHeader className={classes.header} title="Login" action={<Link to="/register">Sign Up</Link>} classes={{ title: classes.title }} />
+      <CardHeader className={classes.header} title="Login" action={<Link component={RouterLink} to="/register">Sign Up</Link>} classes={{ title: classes.title }} />
       <CardContent>
         {dirty && <Typography variant="body1" align="center" color="error">{status}</Typography>}
         {authLoading && (

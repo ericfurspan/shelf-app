@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import Nav from './Nav';
-import BooksGrid from './BooksGrid';
+import BooksGrid from '../components/BooksGrid';
 import { addBook } from '../redux/actions';
 import stockBookImg from '../static/img/defaultBook.png';
 
@@ -13,9 +13,9 @@ const styles = {
 };
 
 class Explore extends React.Component {
-  addBookToShelf = (book) => {
+  addBookToShelf = (book, shelfType) => {
     const { dispatch } = this.props;
-    dispatch(addBook(book));
+    dispatch(addBook(book, shelfType));
   }
 
   render() {
@@ -39,7 +39,7 @@ class Explore extends React.Component {
         <Nav styleTheme={styleTheme} />
         {formattedResults ? (
           <BooksGrid
-            data={formattedResults}
+            books={formattedResults}
             page="explore"
             addBookToShelf={this.addBookToShelf}
             isLoading={isLoading}

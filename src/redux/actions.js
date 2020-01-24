@@ -104,6 +104,7 @@ export const login = (fields, actions) => async (dispatch) => {
     actions.setStatus(null);
     history.push('/library');
   } catch (e) {
+    console.log(e);
     const { status } = e.response;
     const message = status === 401
       ? 'Incorrect username or password'
@@ -186,13 +187,13 @@ export const removeBook = book => async (dispatch, getState) => {
   }
 };
 
-export const addBook = book => async (dispatch, getState) => {
+export const addBook = (book, shelfType) => async (dispatch, getState) => {
   dispatch(tryAddBook());
   try {
     const { token } = getState();
     axios.post(
       `${process.env.REACT_APP_API_BASE_URL}/users/books`,
-      book,
+      { ...book, shelf_type: shelfType },
       {
         headers: { Authorization: `Bearer ${token}` },
       },

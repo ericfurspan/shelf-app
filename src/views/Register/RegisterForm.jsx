@@ -7,9 +7,10 @@ import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CardHeader from '@material-ui/core/CardHeader';
 import TextField from '@material-ui/core/TextField';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
 import { Form } from 'formik';
-import CustomButton from '../Button';
+import Button from '../../components/Button';
 
 const styles = theme => ({
   card: {
@@ -19,12 +20,9 @@ const styles = theme => ({
   form: {
     textAlign: 'center',
   },
-  header: {
-    backgroundColor: theme.palette.primary.main,
-  },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+    marginLeft: theme.spacing(),
+    marginRight: theme.spacing(),
     width: 200,
   },
   pos: {
@@ -55,7 +53,7 @@ function RegisterForm(props) {
 
   return (
     <Card className={classes.card}>
-      <CardHeader className={classes.header} title="Sign Up" action={<Link to="/login">Login</Link>} classes={{ title: classes.title }} />
+      <CardHeader className={classes.header} title="Sign Up" action={<Link component={RouterLink} to="/login">Login</Link>} classes={{ title: classes.title }} />
       <CardContent>
         {dirty && <Typography variant="body1" align="center" color="error">{status}</Typography>}
         {authLoading && (
@@ -104,7 +102,7 @@ function RegisterForm(props) {
           />
           <CardActions style={{ justifyContent: 'center' }}>
             {
-              CustomButton({
+              Button({
                 variant: 'contained',
                 color: 'primary',
                 text: 'Submit',

@@ -6,8 +6,6 @@ import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { withStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import SearchIcon from '@material-ui/icons/Search';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -28,7 +26,6 @@ import {
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.primary.main,
   },
   grow: {
     flexGrow: 1,
@@ -46,10 +43,9 @@ const styles = theme => ({
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: theme.palette.primary.lighter,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing.unit,
+      marginLeft: theme.spacing(),
       width: 'auto',
     },
   },
@@ -64,23 +60,23 @@ const styles = theme => ({
     padding: '0 8px',
   },
   searchIcon: {
-    width: theme.spacing.unit * 9,
+    width: theme.spacing(9),
     height: '100%',
     position: 'absolute',
     pointerEvents: 'none',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: theme.palette.secondary.light,
   },
   inputRoot: {
     width: '100%',
+    color: '#FFFFFF',
   },
   inputInput: {
-    paddingTop: theme.spacing.unit,
-    paddingRight: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 10,
+    paddingTop: theme.spacing(),
+    paddingRight: theme.spacing(),
+    paddingBottom: theme.spacing(),
+    paddingLeft: theme.spacing(10),
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('sm')]: {
@@ -113,7 +109,6 @@ class Nav extends React.Component {
   render() {
     const {
       classes,
-      styleTheme,
       _logout,
       _navigate,
       handleSearch,
@@ -130,6 +125,7 @@ class Nav extends React.Component {
         </List>
         <Divider />
         <List>
+          { /*
           <ListItem button>
             <FormControlLabel
               classes={{ label: classes.switchLabel }}
@@ -141,7 +137,7 @@ class Nav extends React.Component {
                 )}
               label="Dark Mode"
             />
-          </ListItem>
+              </ListItem> */}
           {['Logout'].map(text => (
             <ListItem button key={text} onClick={() => _logout()}>
               <ListItemIcon>

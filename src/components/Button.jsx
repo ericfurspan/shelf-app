@@ -1,34 +1,31 @@
 import React from 'react';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import red from '@material-ui/core/colors/red';
+import UIButton from '@material-ui/core/Button';
+import { styled } from '@material-ui/styles';
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#1976d2',
-      light: '#63a4ff',
-      dark: '#004ba0',
-    },
-    secondary: red,
-  },
+const StyledButton = styled(UIButton)({
+  border: 0,
+  borderRadius: 3,
+  height: 42,
+  padding: '0 24px',
 });
 
-export default function (config) {
+const Button = (props) => {
+  const { color, size, type, disabled, onClick, className, text, icon } = props;
+
   return (
-    <MuiThemeProvider theme={theme}>
-      <Button
-        variant="contained"
-        color={config.color}
-        size={config.size}
-        type={config.type}
-        disabled={config.disabled}
-        onClick={e => config.onClick && config.onClick(e)}
-        className={Array.isArray(config.className) ? config.className.join(' ') : config.className}
-      >
-        {config.text}
-        {config.icon}
-      </Button>
-    </MuiThemeProvider>
+    <StyledButton
+      variant="contained"
+      color={color}
+      size={size}
+      type={type}
+      disabled={disabled}
+      onClick={e => onClick && onClick(e)}
+      className={Array.isArray(className) ? className.join(' ') : className}
+    >
+      {text}
+      {icon}
+    </StyledButton>
   );
-}
+};
+
+export default Button;
