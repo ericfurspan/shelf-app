@@ -136,7 +136,7 @@ class BookModal extends React.Component {
               </Typography>
               <div className={classes.flex}>
                 {addBookToLibraryBtn}
-                {addBookToWishListBtn}
+                {/*addBookToWishListBtn*/}
                 {removeBookFromShelfBtn}
               </div>
             </div>
