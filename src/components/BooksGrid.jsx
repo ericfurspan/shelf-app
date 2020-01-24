@@ -98,11 +98,11 @@ class BooksGrid extends React.Component {
                       </Typography>
                     </CardContent>
                   </div>
-                  <CardActions>
+                  <CardActions style={{justifyContent: 'flex-end'}}>
                     <Button
-                      variant="outlined"
-                      size="small"
-                      color="primary"
+                      variant="contained"
+                      size="medium"
+                      color="secondary"
                       onClick={() => this.selectBook(book)}
                     >
                       View Book

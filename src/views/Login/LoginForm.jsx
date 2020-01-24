@@ -55,7 +55,7 @@ function LoginForm(props) {
 
   return (
     <Card className={classes.card}>
-      <CardHeader className={classes.header} title="Login" action={<Link component={RouterLink} to="/register">Sign Up</Link>} classes={{ title: classes.title }} />
+      <CardHeader className={classes.header} title="Login" action={<Link component={RouterLink} to="/register">I want to Sign Up</Link>} classes={{ title: classes.title }} />
       <CardContent>
         {dirty && <Typography variant="body1" align="center" color="error">{status}</Typography>}
         {authLoading && (
@@ -94,7 +94,7 @@ function LoginForm(props) {
             {
               CustomButton({
                 variant: 'contained',
-                color: 'primary',
+                color: 'secondary',
                 text: 'Submit',
                 type: 'submit',
                 disabled: !isValid,

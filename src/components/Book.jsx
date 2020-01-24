@@ -6,6 +6,7 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import CustomButton from '../components/Button';
 
 export default class Book extends React.Component {
   render() {
@@ -15,6 +16,14 @@ export default class Book extends React.Component {
       index,
       classes,
     } = this.props;
+
+    const viewBookButton = CustomButton({
+      variant: 'contained',
+      color: 'secondary',
+      onClick: selectBook(book),
+      text: 'View Book',
+    });
+
     return (
       <Draggable draggableId={book.isbn} index={index}>
         {provided => (
@@ -44,12 +53,7 @@ export default class Book extends React.Component {
               </CardContent>
             </div>
             <CardActions>
-              <Button
-                size="medium"
-                onClick={() => selectBook(book)}
-              >
-                View Book
-              </Button>
+              {viewBookButton}
             </CardActions>
           </Card>
         )}

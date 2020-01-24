@@ -7,6 +7,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import LoginForm from './LoginForm';
 import { login } from '../../redux/actions';
+import Logo from '../../components/Logo';
 
 const useStyles = makeStyles({
   root: {
@@ -32,18 +33,20 @@ const Login = (props) => {
   const initialValues = { username: '', password: '' };
 
   return (
-    <Grid container justify="center" className={classes.root}>
-      <Slide direction="down" in timeout={750}>
-        <Grid item style={{ marginTop: 100 }}>
-          <Formik
-            render={props => <LoginForm {...props} authLoading={authLoading} />}
-            validationSchema={validationSchema}
-            initialValues={initialValues}
-            onSubmit={(values, actions) => submitLogin(values, actions)}
-          />
-        </Grid>
-      </Slide>
-    </Grid>
+    <>
+      <Grid container justify="center" className={classes.root}>
+        <Slide direction="down" in timeout={750}>
+          <Grid item style={{ marginTop: 100 }}>
+            <Formik
+              render={props => <LoginForm {...props} authLoading={authLoading} />}
+              validationSchema={validationSchema}
+              initialValues={initialValues}
+              onSubmit={(values, actions) => submitLogin(values, actions)}
+            />
+          </Grid>
+        </Slide>
+      </Grid>
+    </>
   );
 }
 

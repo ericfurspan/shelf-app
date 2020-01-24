@@ -1,10 +1,13 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 import Nav from './Nav';
+import SearchBar from '../components/SearchBar';
 import BooksGrid from '../components/BooksGrid';
 import { addBook } from '../redux/actions';
 import stockBookImg from '../static/img/defaultBook.png';
+import { bookSearch } from '../redux/actions';
 
 const styles = {
   root: {
@@ -13,9 +16,19 @@ const styles = {
 };
 
 class Explore extends React.Component {
+  state = {
+    search: '',
+  };
+
   addBookToShelf = (book, shelfType) => {
     const { dispatch } = this.props;
     dispatch(addBook(book, shelfType));
+  }
+
+  updateSearch = (e) => {
+    this.setState({
+      search: e.target.value,
+    });
   }
 
   render() {
@@ -24,7 +37,9 @@ class Explore extends React.Component {
       classes,
       styleTheme,
       searchResults,
+      handleSearch,
     } = this.props;
+    const { search } = this.state;
 
     const formattedResults = searchResults && searchResults.map(b => ({
       title: b.volumeInfo.title,
@@ -54,7 +69,16 @@ class Explore extends React.Component {
                 transform: 'translate(-50%, -50%)',
               }}
             >
-            No results found
+              {search.length > 0 && (
+                <Typography variant="h6" align="center" color="inherit" noWrap>
+                  No results found, try another search.
+                </Typography>
+              )}
+              <SearchBar
+                handleSearch={handleSearch}
+                updateSearch={this.updateSearch}
+                search={search}
+              />
             </div>
           )
         }
@@ -68,4 +92,11 @@ const mapStateToProps = state => ({
   searchResults: state.searchResults,
 });
 
-export default withStyles(styles)(connect(mapStateToProps)(Explore));
+const mapDispatchToProps = dispatch => ({
+  handleSearch: (e, search) => {
+    e.preventDefault();
+    dispatch(bookSearch(search));
+  },
+});
+
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Explore));

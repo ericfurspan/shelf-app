@@ -7,7 +7,7 @@ const theme = createMuiTheme({
       main: '#333333', // 37474f
     },
     secondary: {
-      main: '#546e7a', // e3f2fd
+      main: '#d4edff', // e3f2fd
     },
     error: {
       main: '#f44336',
@@ -15,7 +15,6 @@ const theme = createMuiTheme({
       dark: '#d32f2f',
     }
   },
-  // contrastThreshold: 1,
   typography: {
     fontFamily: 'Open Sans, sans-serif',
   },
