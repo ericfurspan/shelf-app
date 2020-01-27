@@ -8,8 +8,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import { withStyles } from '@material-ui/core/styles';
-import BookModal from '../views/BookModal';
-import Spinner from './Spinner';
+import BookModal from './BookModal';
 
 const styles = {
   root: {
@@ -44,7 +43,6 @@ class BooksGrid extends React.Component {
 
   render() {
     const {
-      isLoading,
       classes,
       books,
       removeBookFromShelf,
@@ -52,11 +50,6 @@ class BooksGrid extends React.Component {
       page,
     } = this.props;
 
-    if (isLoading) {
-      return (
-        <Spinner />
-      );
-    }
     const { selectedBook } = this.state;
 
     return (

@@ -5,7 +5,7 @@ import Modal from '@material-ui/core/Modal';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/LibraryAdd';
 import Divider from '@material-ui/core/Divider';
-import CustomButton from '../components/Button';
+import CustomButton from './Button';
 
 const styles = theme => ({
   paper: {

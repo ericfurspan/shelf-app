@@ -7,7 +7,6 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import LoginForm from './LoginForm';
 import { login } from '../../redux/actions';
-import Logo from '../../components/Logo';
 
 const useStyles = makeStyles({
   root: {

@@ -10,10 +10,11 @@ import Library from './views/Library';
 import Login from './views/Login/Login';
 import Explore from './views/Explore';
 import Register from './views/Register/Register';
-import Notification from './views/Notification';
+import Notification from './components/Notification';
 import Dashboard from './views/Dashboard';
 import history from './history';
 import { clearNotification } from './redux/actions';
+import Spinner from './components/Spinner';
 
 const ProtectedRoute = ({ component: Component, isLoggedIn, ...rest }) => (
   <Route
@@ -31,7 +32,14 @@ class AppRouter extends React.Component {
   }
 
   render() {
-    const { isLoggedIn, notification } = this.props;
+    const { isLoggedIn, notification, isLoading } = this.props;
+
+    let spinner;
+    if (isLoading) {
+      spinner = (
+        <Spinner />
+      )
+    }
     let notificationSnackbar;
     if (notification) {
       notificationSnackbar = (
@@ -45,6 +53,7 @@ class AppRouter extends React.Component {
     return (
       <Router history={history}>
         {notificationSnackbar}
+        {spinner}
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/dashboard" component={Dashboard} />
@@ -59,6 +68,7 @@ class AppRouter extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  isLoading: state.isLoading,
   isLoggedIn: state.token && state.currentUser !== null,
   styleTheme: state.styleTheme,
   notification: state.notification,

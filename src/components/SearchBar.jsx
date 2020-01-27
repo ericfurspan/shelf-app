@@ -6,9 +6,9 @@ import { withStyles, fade } from '@material-ui/core/styles';
 const styles = theme => ({
   search: {
     position: 'relative',
-    backgroundColor: fade(theme.palette.primary.main, 0.85),
+    backgroundColor: fade(theme.palette.common.white, 0.15),
     '&:hover': {
-      backgroundColor: fade(theme.palette.primary.main, 0.65),
+      backgroundColor: fade(theme.palette.common.white, 0.25),
     },
     borderRadius: theme.shape.borderRadius,
     width: '100%',
