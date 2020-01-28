@@ -13,7 +13,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ExitIcon from '@material-ui/icons/ExitToApp';
-import BookmarkCollection from '@material-ui/icons/CollectionsBookmark';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import { connect } from 'react-redux';
 import {
   bookSearch,
@@ -29,7 +29,8 @@ const styles = theme => ({
     flexGrow: 1,
   },
   drawerRoot: {
-    backgroundColor: '#dcdcdc',
+    color: '#333333',
+    backgroundColor: theme.palette.secondary.main,
   },
   grow: {
     flexGrow: 1,
@@ -117,7 +118,7 @@ const styles = theme => ({
 class Nav extends React.Component {
   state = {
     drawerOpen: false,
-    search: '',
+    searchTerm: '',
   };
 
   toggleDrawer = open => () => {
@@ -126,10 +127,10 @@ class Nav extends React.Component {
     });
   };
 
-  updateSearch = (e) => {
+  updateSearch = (value) => {
     this.setState({
-      search: e.target.value,
-    });
+      searchTerm: value,
+    }); 
   }
 
   render() {
@@ -139,13 +140,13 @@ class Nav extends React.Component {
       _navigate,
       handleSearch,
     } = this.props;
-    const { drawerOpen, search } = this.state;
+    const { drawerOpen, searchTerm } = this.state;
 
     const sideList = (
       <div className={classes.list}>
         <List>
           <ListItem button key="Library" onClick={() => _navigate('/library')}>
-            <ListItemIcon><BookmarkCollection /></ListItemIcon>
+            <ListItemIcon><LibraryBooksIcon /></ListItemIcon>
             <ListItemText primary="Library" />
           </ListItem>
           <ListItem button key="Explore" onClick={() => _navigate('/explore')}>
@@ -172,11 +173,8 @@ class Nav extends React.Component {
         <AppBar position="relative">
           <Toolbar style={{ minHeight: '86px' }}>
             <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer" onClick={this.toggleDrawer(true)}>
-              <MenuIcon />
+              <MenuIcon fontSize="large" />
             </IconButton>
-            <Typography className={classes.title} variant="overline" color="inherit" noWrap>
-              A Personal Digital Bookshelf
-            </Typography>
             <div className={classes.navMid}>
               <div className={classes.logo}>
                 <Logo />
@@ -189,7 +187,7 @@ class Nav extends React.Component {
             <SearchBar
               handleSearch={handleSearch}
               updateSearch={this.updateSearch}
-              search={search}
+              searchTerm={searchTerm}
             />
             {/*<div className={classes.search}>
               <div className={classes.searchIcon}>

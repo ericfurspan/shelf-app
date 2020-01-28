@@ -7,11 +7,13 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import LoginForm from './LoginForm';
 import { login } from '../../redux/actions';
+import Branding from '../../components/Branding';
 
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
   },
+
 });
 
 const validationSchema = Yup.object({
@@ -33,9 +35,10 @@ const Login = (props) => {
 
   return (
     <>
+      <Branding />
       <Grid container justify="center" className={classes.root}>
-        <Slide direction="down" in timeout={750}>
-          <Grid item style={{ marginTop: 100 }}>
+        <Slide direction="up" in timeout={750}>
+          <Grid item style={{ marginTop: 75 }}>
             <Formik
               render={props => <LoginForm {...props} authLoading={authLoading} />}
               validationSchema={validationSchema}

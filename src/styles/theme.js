@@ -4,10 +4,10 @@ const theme = createMuiTheme({
   palette: {
     type: 'light', // dark
     primary: {
-      main: '#333333', // 37474f
+      main: '#15202B', // 37474f
     },
     secondary: {
-      main: '#d4edff', // e3f2fd
+      main: '#E9F0FE', // e3f2fd
     },
     error: {
       main: '#f44336',

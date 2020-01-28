@@ -14,7 +14,7 @@ import CustomButton from '../../components/Button';
 
 const styles = theme => ({
   card: {
-    minWidth: 275,
+    minWidth: 300,
     maxWidth: 675,
   },
   form: {
@@ -55,7 +55,7 @@ function LoginForm(props) {
 
   return (
     <Card className={classes.card}>
-      <CardHeader className={classes.header} title="Login" action={<Link component={RouterLink} to="/register">I want to Sign Up</Link>} classes={{ title: classes.title }} />
+      <CardHeader className={classes.header} title="Login" action={<Link component={RouterLink} to="/register">Go to Sign Up</Link>} classes={{ title: classes.title }} />
       <CardContent>
         {dirty && <Typography variant="body1" align="center" color="error">{status}</Typography>}
         {authLoading && (

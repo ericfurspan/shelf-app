@@ -34,26 +34,18 @@ class AppRouter extends React.Component {
   render() {
     const { isLoggedIn, notification, isLoading } = this.props;
 
-    let spinner;
-    if (isLoading) {
-      spinner = (
-        <Spinner />
-      )
-    }
-    let notificationSnackbar;
-    if (notification) {
-      notificationSnackbar = (
-        <Notification
-          notification={notification}
-          handleClearNotification={this.handleClearNotification}
-        />
-      );
-    }
-
     return (
       <Router history={history}>
-        {notificationSnackbar}
-        {spinner}
+        {notification && (
+          <Notification
+            notification={notification}
+            handleClearNotification={this.handleClearNotification}
+          />
+        )}
+        {isLoading && (
+          <Spinner />
+        )}
+
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/dashboard" component={Dashboard} />

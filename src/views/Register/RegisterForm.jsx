@@ -14,7 +14,7 @@ import Button from '../../components/Button';
 
 const styles = theme => ({
   card: {
-    minWidth: 275,
+    minWidth: 300,
     maxWidth: 675,
   },
   form: {
@@ -53,7 +53,7 @@ function RegisterForm(props) {
 
   return (
     <Card className={classes.card}>
-      <CardHeader className={classes.header} title="Sign Up" action={<Link component={RouterLink} to="/login">I want to Login</Link>} classes={{ title: classes.title }} />
+      <CardHeader className={classes.header} title="Sign Up" action={<Link component={RouterLink} to="/login">Go to Login</Link>} classes={{ title: classes.title }} />
       <CardContent>
         {dirty && <Typography variant="body1" align="center" color="error">{status}</Typography>}
         {authLoading && (

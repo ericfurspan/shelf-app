@@ -1,5 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 import Nav from './Nav';
 import BooksGrid from '../components/BooksGrid';
@@ -12,7 +13,11 @@ import {
 const styles = {
   root: {
     flexGrow: 1,
+    backgroundColor: '#E9F0FE',
   },
+  pageHeader: {
+    margin: '24px',
+  }
 };
 
 class Library extends React.Component {
@@ -41,7 +46,8 @@ class Library extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Nav styleTheme={styleTheme} />
+        <Nav />
+        <Typography variant="h4" className={classes.pageHeader}>My Library</Typography>
         <BooksGrid
           books={savedBooks}
           removeBookFromShelf={this.removeBookFromShelf}

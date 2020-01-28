@@ -5,10 +5,12 @@ import Nav from './Nav';
 import BooksGrid from '../components/BooksGrid';
 import { addBook } from '../redux/actions';
 import stockBookImg from '../static/img/defaultBook.png';
+import Typography from '@material-ui/core/Typography';
 
 const styles = {
   root: {
     flexGrow: 1,
+    backgroundColor: '#E9F0FE',
   },
 };
 
@@ -31,13 +33,16 @@ class Explore extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Nav styleTheme={styleTheme} />
+        <Nav />
         {formattedResults && (
-          <BooksGrid
-            books={formattedResults}
-            page="explore"
-            addBookToShelf={addBookToShelf}
-          />
+          <>
+            {/*<Typography></Typography>*/}
+            <BooksGrid
+              books={formattedResults}
+              page="explore"
+              addBookToShelf={addBookToShelf}
+            />
+          </>
         )}
       </div>
     );

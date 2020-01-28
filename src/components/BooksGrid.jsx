@@ -9,6 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import { withStyles } from '@material-ui/core/styles';
 import BookModal from './BookModal';
+import DefaultBook from '../static/img/defaultBook.png';
 
 const styles = {
   root: {
@@ -75,7 +76,7 @@ class BooksGrid extends React.Component {
                   <div className={classes.actionarea}>
                     <CardMedia
                       className={classes.media}
-                      image={book.image_link}
+                      image={book.image_link || DefaultBook}
                       title={book.title}
                     />
                     <CardContent>
@@ -98,7 +99,7 @@ class BooksGrid extends React.Component {
                       color="secondary"
                       onClick={() => this.selectBook(book)}
                     >
-                      View Book
+                      See More
                     </Button>
                   </CardActions>
                 </Card>
