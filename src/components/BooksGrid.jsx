@@ -19,7 +19,7 @@ const styles = {
     justifyContent: 'flex-end',
   },
   card: {
-    maxWidth: 350,
+    maxWidth: 425,
     margin: 'auto',
   },
   actionarea: {

@@ -13,7 +13,8 @@ const styles = {
     margin: '6px 24px',
   }
 };
-class WishList extends React.Component {
+
+class ActiveReading extends React.Component {
   render() {
     const {
       classes,
@@ -22,22 +23,24 @@ class WishList extends React.Component {
       removeBookFromShelf,
     } = this.props;
 
-    const books = savedBooks && savedBooks.filter(b => b.shelf_type === 'WishList');
-    
+    const books = savedBooks && savedBooks.filter(b => b.shelf_type === 'Active');
+
     return books.length === 0 ? (
       null
     ) : (
       <>
-        <Typography variant="h4" className={classes.pageHeader}>Want to Read</Typography>
+        <Typography variant="h4" className={classes.pageHeader}>Actively Reading</Typography>
         <BooksGrid
           books={books}
           removeBookFromShelf={removeBookFromShelf}
-          page="WishList"
+          page="Active"
           isLoading={isLoading}
           classes={classes}
+          gridWidthSm={12}
+          gridWidthMd={6}
         />
       </>
-    );
+    )
   }
 }
 
@@ -45,4 +48,4 @@ const mapStateToProps = state => ({
   savedBooks: state.savedBooks,
 });
 
-export default withStyles(styles)(connect(mapStateToProps)(WishList));
+export default withStyles(styles)(connect(mapStateToProps)(ActiveReading));

@@ -2,7 +2,6 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
-import Nav from './Nav';
 import BooksGrid from '../components/BooksGrid';
 import {
   getSavedBooks,
@@ -12,11 +11,12 @@ import {
 
 const styles = {
   root: {
+    marginTop: 20,
     flexGrow: 1,
     backgroundColor: '#E9F0FE',
   },
   pageHeader: {
-    margin: '24px',
+    margin: '6px 24px',
   }
 };
 
@@ -40,14 +40,13 @@ class Library extends React.Component {
     const {
       classes,
       savedBooks,
-      styleTheme,
       isLoading,
     } = this.props;
 
     return (
       <div className={classes.root}>
-        <Nav />
-        <Typography variant="h4" className={classes.pageHeader}>My Library</Typography>
+        <Typography variant="h4" className={classes.pageHeader}>Library</Typography>
+        <Typography variant="subtitle1" className={classes.pageHeader}>All my books</Typography>
         <BooksGrid
           books={savedBooks}
           removeBookFromShelf={this.removeBookFromShelf}
@@ -62,7 +61,6 @@ class Library extends React.Component {
 const mapStateToProps = state => ({
   isLoading: state.isLoading,
   savedBooks: state.savedBooks,
-  styleTheme: state.styleTheme,
 });
 
 export default withStyles(styles)(connect(mapStateToProps)(Library));

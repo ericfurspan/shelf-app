@@ -1,7 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import Nav from './Nav';
 import BooksGrid from '../components/BooksGrid';
 import { addBook } from '../redux/actions';
 import stockBookImg from '../static/img/defaultBook.png';
@@ -18,7 +17,6 @@ class Explore extends React.Component {
   render() {
     const {
       classes,
-      styleTheme,
       searchResults,
       addBookToShelf,
     } = this.props;
@@ -33,7 +31,6 @@ class Explore extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Nav />
         {formattedResults && (
           <>
             {/*<Typography></Typography>*/}

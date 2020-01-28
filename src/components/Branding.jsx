@@ -7,10 +7,11 @@ const Branding = () => (
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    color: '#FFFFFF',
-    marginTop: '2%',
+    backgroundColor: '#15202B',
+    color: '#E9F0FE',
+    paddingTop: '2%',
   }}>
-    <Logo />
+    <Logo color="#E9F0FE" />
     <Typography variant="h3">Shelf</Typography><br />
     <Typography variant="subtitle1">A PERSONAL DIGITAL BOOKSHELF</Typography>
   </div>

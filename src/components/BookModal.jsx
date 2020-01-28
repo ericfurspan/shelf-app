@@ -83,6 +83,7 @@ class BookModal extends React.Component {
     let addBookToLibraryBtn;
     let addBookToWishListBtn;
     let removeBookFromShelfBtn;
+    let addBookToActiveBtn;
 
     if (page === 'explore') {
       addBookToLibraryBtn = CustomButton({
@@ -136,7 +137,7 @@ class BookModal extends React.Component {
               </Typography>
               <div className={classes.flex}>
                 {addBookToLibraryBtn}
-                {/*addBookToWishListBtn*/}
+                {addBookToWishListBtn}
                 {removeBookFromShelfBtn}
               </div>
             </div>

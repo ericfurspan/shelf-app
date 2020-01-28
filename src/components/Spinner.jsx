@@ -10,7 +10,7 @@ const Spinner = () => (
       zIndex: 1000,
     }}
   >
-    <CircularProgress size={75} color="secondary" />
+    <CircularProgress size={50} color="primary" />
   </div>
 );
 

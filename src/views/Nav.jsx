@@ -5,13 +5,15 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { withStyles, fade } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
 import ListItemText from '@material-ui/core/ListItemText';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExitIcon from '@material-ui/icons/ExitToApp';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import { connect } from 'react-redux';
@@ -86,6 +88,9 @@ const styles = theme => ({
     fontSize: '1rem',
     padding: '0 8px',
   },
+  nested: {
+    paddingLeft: theme.spacing(4),
+  },
   searchIcon: {
     width: theme.spacing(9),
     height: '100%',
@@ -145,14 +150,33 @@ class Nav extends React.Component {
     const sideList = (
       <div className={classes.list}>
         <List>
-          <ListItem button key="Library" onClick={() => _navigate('/library')}>
-            <ListItemIcon><LibraryBooksIcon /></ListItemIcon>
-            <ListItemText primary="Library" />
+          {/*
+            <ListItem button key="Dashboard" onClick={() => _navigate('/dashboard')}>
+              <ListItemIcon><DashboardIcon /></ListItemIcon>
+              <ListItemText primary="Dashboard" />
+            </ListItem>
+          */}
+          <ListItem>
+            <ListItemText primary="My Shelves" />
           </ListItem>
-          <ListItem button key="Explore" onClick={() => _navigate('/explore')}>
+          <List component="div" disablePadding>
+            <ListItem button className={classes.nested} onClick={() => _navigate('/library')}>
+              <ListItemIcon><LibraryBooksIcon /></ListItemIcon>
+              <ListItemText primary="Library" />
+            </ListItem>
+            {/*<ListItem button className={classes.nested} key="Active" onClick={() => _navigate('/active')}>
+                <ListItemIcon><LocalLibraryIcon /></ListItemIcon>
+                <ListItemText primary="Actively Reading" />
+              </ListItem>*/}
+            <ListItem button className={classes.nested} key="WishList" onClick={() => _navigate('/wishlist')}>
+              <ListItemIcon><FavoriteIcon /></ListItemIcon>
+              <ListItemText primary="Want to Read" />
+            </ListItem>
+          </List>
+          {/*<ListItem button key="Explore" onClick={() => _navigate('/explore')}>
             <ListItemIcon><SearchIcon /></ListItemIcon>
-            <ListItemText primary="Explore" />
-          </ListItem>
+            <ListItemText primary="Search Books" />
+          </ListItem>*/}
         </List>
         <Divider />
         <List>
@@ -189,22 +213,6 @@ class Nav extends React.Component {
               updateSearch={this.updateSearch}
               searchTerm={searchTerm}
             />
-            {/*<div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <form onSubmit={e => handleSearch(e, search)} noValidate autoComplete="off">
-                <InputBase
-                  placeholder="Find books"
-                  onChange={this.updateSearch}
-                  value={search}
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                  }}
-                />
-              </form>
-            </div>*/}
           </Toolbar>
           <Drawer open={drawerOpen} onClose={this.toggleDrawer(false)} classes={{paper: classes.drawerRoot}}>
             <div

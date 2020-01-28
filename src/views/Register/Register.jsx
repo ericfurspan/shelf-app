@@ -4,13 +4,16 @@ import Slide from '@material-ui/core/Slide';
 import { Formik } from 'formik';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
+import { makeStyles } from '@material-ui/core/styles';
 import RegisterForm from './RegisterForm';
 import { registerUser } from '../../redux/actions';
 import Branding from '../../components/Branding';
 
-const styles = () => ({
+const useStyles = makeStyles({
   root: {
     flexGrow: 1,
+    height: '100vh',
+    backgroundColor: '#15202B',
   },
 });
 
@@ -24,37 +27,36 @@ const validationSchema = Yup.object({
     .required('Password is required'),
 });
 
-class Register extends React.Component {
-  submitRegistration = (values, actions) => {
-    const { dispatch } = this.props;
+const Register = props => {
+  const submitRegistration = (values, actions) => {
+    const { dispatch } = props;
     dispatch(registerUser(values, actions));
   }
 
-  render() {
-    const { authLoading } = this.props;
+    const { authLoading } = props;
+    const classes = useStyles();
 
     const initialValues = {
       name: '', username: '', password: '',
     };
 
-    return (
-      <div className={styles.root}>
-        <Branding />
-        <Grid container justify="center">
-          <Slide direction="up" in timeout={750}>
-            <Grid item style={{ marginTop: 75 }}>
-              <Formik
-                render={props => <RegisterForm {...props} authLoading={authLoading} />}
-                validationSchema={validationSchema}
-                initialValues={initialValues}
-                onSubmit={(values, actions) => this.submitRegistration(values, actions)}
-              />
-            </Grid>
-          </Slide>
-        </Grid>
-      </div>
-    );
-  }
+  return (
+    <>
+      <Branding />
+      <Grid container justify="center" className={classes.root}>
+        <Slide direction="up" in timeout={750}>
+          <Grid item style={{ marginTop: 75 }}>
+            <Formik
+              render={props => <RegisterForm {...props} authLoading={authLoading} />}
+              validationSchema={validationSchema}
+              initialValues={initialValues}
+              onSubmit={(values, actions) => submitRegistration(values, actions)}
+            />
+          </Grid>
+        </Slide>
+      </Grid>
+    </>
+  );
 }
 
 export default connect()(Register);

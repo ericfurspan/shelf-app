@@ -12,8 +12,9 @@ import Branding from '../../components/Branding';
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
+    height: '100vh',
+    backgroundColor: '#15202B',
   },
-
 });
 
 const validationSchema = Yup.object({
