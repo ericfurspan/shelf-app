@@ -10,21 +10,19 @@ import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
 import ListItemText from '@material-ui/core/ListItemText';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExitIcon from '@material-ui/icons/ExitToApp';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import Logo from '../components/Logo';
+import SearchBar from '../components/SearchBar';
 import { connect } from 'react-redux';
 import {
   bookSearch,
   navigate,
   toggleStyleTheme,
+  updateSearchTerm,
   logout,
 } from '../redux/actions';
-import Logo from '../components/Logo';
-import SearchBar from '../components/SearchBar';
 
 const styles = theme => ({
   root: {
@@ -120,42 +118,28 @@ const styles = theme => ({
   },
 });
 
-class Nav extends React.Component {
-  state = {
-    drawerOpen: false,
-    searchTerm: '',
-  };
-
+class NavBar extends React.Component {
+  state = { drawerOpen: false };
+  
   toggleDrawer = open => () => {
-    this.setState({
-      drawerOpen: open,
-    });
+    this.setState({ drawerOpen: open });
   };
-
-  updateSearch = (value) => {
-    this.setState({
-      searchTerm: value,
-    }); 
-  }
 
   render() {
     const {
       classes,
       _logout,
       _navigate,
-      handleSearch,
+      makeSearch,
+      searchTerm,
+      updateSearch,
     } = this.props;
-    const { drawerOpen, searchTerm } = this.state;
+  
+    const { drawerOpen } = this.state;
 
     const sideList = (
       <div className={classes.list}>
         <List>
-          {/*
-            <ListItem button key="Dashboard" onClick={() => _navigate('/dashboard')}>
-              <ListItemIcon><DashboardIcon /></ListItemIcon>
-              <ListItemText primary="Dashboard" />
-            </ListItem>
-          */}
           <ListItem>
             <ListItemText primary="My Shelves" />
           </ListItem>
@@ -168,10 +152,6 @@ class Nav extends React.Component {
                 <ListItemIcon><LocalLibraryIcon /></ListItemIcon>
                 <ListItemText primary="Actively Reading" />
               </ListItem>*/}
-            <ListItem button className={classes.nested} key="WishList" onClick={() => _navigate('/wishlist')}>
-              <ListItemIcon><FavoriteIcon /></ListItemIcon>
-              <ListItemText primary="Want to Read" />
-            </ListItem>
           </List>
           {/*<ListItem button key="Explore" onClick={() => _navigate('/explore')}>
             <ListItemIcon><SearchIcon /></ListItemIcon>
@@ -209,8 +189,8 @@ class Nav extends React.Component {
             </div>
             <div className={classes.grow} />
             <SearchBar
-              handleSearch={handleSearch}
-              updateSearch={this.updateSearch}
+              handleSearch={makeSearch}
+              updateSearch={updateSearch}
               searchTerm={searchTerm}
             />
           </Toolbar>
@@ -234,10 +214,15 @@ const mapDispatchToProps = dispatch => ({
   _navigate: route => dispatch(navigate(route)),
   _logout: () => dispatch(logout()),
   updateStyleTheme: () => dispatch(toggleStyleTheme()),
-  handleSearch: (e, search) => {
+  makeSearch: (e, search) => {
     e.preventDefault();
     dispatch(bookSearch(search));
   },
+  updateSearch: searchTerm => dispatch(updateSearchTerm(searchTerm)),
 });
 
-export default withStyles(styles)(connect(null, mapDispatchToProps)(Nav));
+const mapStateToProps = state => ({
+  searchTerm: state.searchTerm,
+});
+
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(NavBar));

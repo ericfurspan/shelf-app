@@ -9,6 +9,7 @@ const initialState = {
   savedBooks: [],
   searchResults: null,
   styleTheme: 'light',
+  searchTerm: null,
 };
 
 export default function reducer(state = initialState, action) {
@@ -70,6 +71,10 @@ export default function reducer(state = initialState, action) {
       return Object.assign({}, state, {
         isLoading: true,
       });
+    case 'UPDATE_SEARCH_TERM':
+      return Object.assign({}, state, {
+        searchTerm: action.searchTerm,
+    });
     case 'TRY_SEARCH_BOOKS':
       return Object.assign({}, state, {
         isLoading: true,
@@ -104,6 +109,13 @@ export default function reducer(state = initialState, action) {
           variant: 'success',
         },
       });
+      case 'UPDATE_BOOK_STATUS_SUCCESS':
+        return Object.assign({}, state, {
+          notification: {
+            message: `Marked ${action.title} as ${action.status}`,
+            variant: 'success',
+          },
+        });
     case 'CLEAR_NOTIFICATION':
       return Object.assign({}, state, {
         notification: null,

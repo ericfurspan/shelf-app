@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/LibraryAdd';
+import CloseIcon from '@material-ui/icons/Close';
 import Divider from '@material-ui/core/Divider';
 import CustomButton from './Button';
 
@@ -40,28 +41,29 @@ const styles = theme => ({
   },
   rightIcon: {
     marginLeft: theme.spacing(),
+    fill: '#15202B',
   },
   bottomRight: {
     float: 'right',
     margin: theme.spacing(2),
   },
-  flex: {
+  flexRow: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-  }
+  },
+  closeBtn: {
+    cursor: 'pointer',
+    position: 'absolute',
+    right: 6,
+    top: 6,
+  },
 });
 
 class BookModal extends React.Component {
   handleAddBookToLibrary = () => {
     const { addBookToShelf, closeModal, selectedBook } = this.props;
     addBookToShelf(selectedBook, 'Library');
-    closeModal();
-  }
-
-  handleAddBookToWishList = () => {
-    const { addBookToShelf, closeModal, selectedBook } = this.props;
-    addBookToShelf(selectedBook, 'WishList');
     closeModal();
   }
 
@@ -81,9 +83,7 @@ class BookModal extends React.Component {
     } = this.props;
 
     let addBookToLibraryBtn;
-    let addBookToWishListBtn;
     let removeBookFromShelfBtn;
-    let addBookToActiveBtn;
 
     if (page === 'explore') {
       addBookToLibraryBtn = CustomButton({
@@ -94,21 +94,13 @@ class BookModal extends React.Component {
         text: 'Add to Library',
         icon: <AddIcon className={classes.rightIcon} />,
       });
-      addBookToWishListBtn = CustomButton({
-        variant: 'contained',
-        color: 'secondary',
-        onClick: this.handleAddBookToWishList,
-        className: classes.bottomRight,
-        text: 'Add to Wish List',
-        icon: <AddIcon className={classes.rightIcon} />,
-      });
-    } else if (page === 'Library' || page === 'WishList') {
+    } else if (page === 'library') {
       removeBookFromShelfBtn = CustomButton({
         variant: 'contained',
         color: 'secondary',
         onClick: this.handleRemoveBook,
         className: classes.bottomRight,
-        text: 'Remove from Shelf',
+        text: 'Remove from Library',
         icon: <DeleteIcon className={classes.rightIcon} />,
       });
     }
@@ -124,6 +116,7 @@ class BookModal extends React.Component {
         >
           <div>
             <div className={classes.paper}>
+              <CloseIcon className={classes.closeBtn} onClick={() => closeModal(null)} />
               <img src={selectedBook.image_link} alt="Book cover" className={classes.bookCover} />
               <Typography variant="h6" id="modal-title">
                 {selectedBook.title}
@@ -135,9 +128,8 @@ class BookModal extends React.Component {
               <Typography variant="subtitle1">
                 {selectedBook.description.replace(/<[^>]+>/g, '')}
               </Typography>
-              <div className={classes.flex}>
+              <div className={classes.flexRow}>
                 {addBookToLibraryBtn}
-                {addBookToWishListBtn}
                 {removeBookFromShelfBtn}
               </div>
             </div>

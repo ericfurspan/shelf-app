@@ -11,13 +11,10 @@ import Login from './views/Login/Login';
 import Explore from './views/Explore';
 import Register from './views/Register/Register';
 import Notification from './components/Notification';
-import Dashboard from './views/Dashboard';
-import WishList from './views/WishList';
-import Nav from './views/Nav';
+import NavBar from './views/NavBar';
 import history from './history';
 import { clearNotification } from './redux/actions';
 import Spinner from './components/Spinner';
-import ActiveReading from './views/ActiveReading';
 
 const ProtectedRoute = ({ component: Component, isLoggedIn, ...rest }) => (
   <Route
@@ -49,15 +46,12 @@ class AppRouter extends React.Component {
           <Spinner />
         )}
         {isLoggedIn && (
-          <Nav />
+          <NavBar />
         )}
         <Switch>
           <Route path="/login" component={Login} />
-          <Route path="/dashboard" component={Dashboard} />
           <Route path="/register" component={Register} />
           <Route path="/explore" component={Explore} />
-          <Route path="/wishlist" component={WishList} />
-          <Route path="/active" component={ActiveReading} />
           <ProtectedRoute isLoggedIn={isLoggedIn} path="/library" component={Library} />
           <Route path="/" render={() => <Redirect to="/library" />} />
         </Switch>

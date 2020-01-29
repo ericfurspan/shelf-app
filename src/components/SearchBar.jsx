@@ -59,7 +59,7 @@ const styles = theme => ({
   },
 });
 
-const SearchBar = (props) => {
+const SearchBar = props => {
   const { handleSearch, updateSearch, searchTerm, classes } = props;
 
   return (
@@ -72,7 +72,7 @@ const SearchBar = (props) => {
           <InputBase
             placeholder="Find books"
             onChange={e => updateSearch(e.target.value)}
-            value={searchTerm}
+            value={searchTerm || ''}
             classes={{
               root: classes.inputRoot,
               input: classes.inputInput,

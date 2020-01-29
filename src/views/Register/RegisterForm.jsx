@@ -10,7 +10,9 @@ import TextField from '@material-ui/core/TextField';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import { Form } from 'formik';
-import Button from '../../components/Button';
+import CustomButton from '../../components/Button';
+import Button from '@material-ui/core/Button';
+import Slide from '@material-ui/core/Slide';
 
 const styles = theme => ({
   card: {
@@ -28,6 +30,24 @@ const styles = theme => ({
   pos: {
     marginBottom: 12,
   },
+  loginLink: {
+    margin: '36px auto',
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  header: {
+    color: '#15202B',
+  },
+  loginWrapper: {
+    position: 'absolute',
+    right: 12,
+    top: 12,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    minWidth: 350,
+    justifyContent: 'space-around',
+  }
 });
 
 function RegisterForm(props) {
@@ -52,68 +72,88 @@ function RegisterForm(props) {
   const { classes } = props;
 
   return (
-    <Card className={classes.card}>
-      <CardHeader className={classes.header} title="Sign Up" action={<Link component={RouterLink} to="/login">Go to Login</Link>} classes={{ title: classes.title }} />
-      <CardContent>
-        {dirty && <Typography variant="body1" align="center" color="error">{status}</Typography>}
-        {authLoading && (
-          <div style={{ textAlign: 'center' }}>
-            <CircularProgress />
-          </div>
-        )}
-        <Form className={classes.form}>
-          <TextField
-            id="name-input"
-            name="name"
-            label="Name"
-            className={classes.textField}
-            helperText={touched.name ? errors.name : ''}
-            error={touched.name && Boolean(errors.name)}
-            onChange={e => change('name', e)}
-            value={name}
-            margin="normal"
-          />
-          <br />
-          <TextField
-            id="username-input"
-            name="username"
-            label="Username"
-            className={classes.textField}
-            autoComplete="username"
-            helperText={touched.username ? errors.username : ''}
-            error={touched.username && Boolean(errors.username)}
-            onChange={e => change('username', e)}
-            value={username}
-            margin="normal"
-          />
-          <br />
-          <TextField
-            id="password-input"
-            name="password"
-            label="Password"
-            className={classes.textField}
-            type="password"
-            autoComplete="current-password"
-            helperText={touched.password ? errors.password : ''}
-            error={touched.password && Boolean(errors.password)}
-            onChange={e => change('password', e)}
-            value={password}
-            margin="normal"
-          />
-          <CardActions style={{ justifyContent: 'center' }}>
-            {
-              Button({
-                variant: 'contained',
-                color: 'secondary',
-                text: 'Submit',
-                type: 'submit',
-                disabled: !isValid,
-              })
-            }
-          </CardActions>
-        </Form>
-      </CardContent>
-    </Card>
+    <>
+      <Slide direction="down" in timeout={750}>
+        <div className={classes.loginWrapper}>
+          <Typography variant="subtitle1" color="secondary" align="center">Already have an account?</Typography>
+          <Link component={RouterLink} to="/login">
+            <Button
+              variant='outlined'
+              color='secondary'
+              type='button'
+              size='large'
+              className={classes.loginLink}
+            >
+              Login
+            </Button>
+          </Link>
+        </div>
+      </Slide>
+      <Slide direction="down" in timeout={750}>
+        <Card className={classes.card}>
+          <CardHeader className={classes.header} title="Sign Up" align="center" classes={{ title: classes.title }} />
+          <CardContent>
+            {dirty && <Typography variant="body1" align="center" color="error">{status}</Typography>}
+            {authLoading && (
+              <div style={{ textAlign: 'center' }}>
+                <CircularProgress />
+              </div>
+            )}
+            <Form className={classes.form}>
+              <TextField
+                id="name-input"
+                name="name"
+                label="Name"
+                className={classes.textField}
+                helperText={touched.name ? errors.name : ''}
+                error={touched.name && Boolean(errors.name)}
+                onChange={e => change('name', e)}
+                value={name}
+                margin="normal"
+              />
+              <br />
+              <TextField
+                id="username-input"
+                name="username"
+                label="Username"
+                className={classes.textField}
+                autoComplete="username"
+                helperText={touched.username ? errors.username : ''}
+                error={touched.username && Boolean(errors.username)}
+                onChange={e => change('username', e)}
+                value={username}
+                margin="normal"
+              />
+              <br />
+              <TextField
+                id="password-input"
+                name="password"
+                label="Password"
+                className={classes.textField}
+                type="password"
+                autoComplete="current-password"
+                helperText={touched.password ? errors.password : ''}
+                error={touched.password && Boolean(errors.password)}
+                onChange={e => change('password', e)}
+                value={password}
+                margin="normal"
+              />
+              <CardActions style={{ justifyContent: 'center' }}>
+                {
+                  CustomButton({
+                    variant: 'contained',
+                    color: 'secondary',
+                    text: 'Submit',
+                    type: 'submit',
+                    disabled: !isValid,
+                  })
+                }
+              </CardActions>
+            </Form>
+          </CardContent>
+        </Card>
+      </Slide>
+    </>
   );
 }
 

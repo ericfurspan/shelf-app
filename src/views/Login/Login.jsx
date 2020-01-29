@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
-import Slide from '@material-ui/core/Slide';
 import { makeStyles } from '@material-ui/core/styles';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -38,16 +37,14 @@ const Login = (props) => {
     <>
       <Branding />
       <Grid container justify="center" className={classes.root}>
-        <Slide direction="up" in timeout={750}>
-          <Grid item style={{ marginTop: 75 }}>
-            <Formik
-              render={props => <LoginForm {...props} authLoading={authLoading} />}
-              validationSchema={validationSchema}
-              initialValues={initialValues}
-              onSubmit={(values, actions) => submitLogin(values, actions)}
-            />
-          </Grid>
-        </Slide>
+        <Grid item style={{ marginTop: 48 }}>
+          <Formik
+            render={props => <LoginForm {...props} authLoading={authLoading} />}
+            validationSchema={validationSchema}
+            initialValues={initialValues}
+            onSubmit={(values, actions) => submitLogin(values, actions)}
+          />
+        </Grid>
       </Grid>
     </>
   );

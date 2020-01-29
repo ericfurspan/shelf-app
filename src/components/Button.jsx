@@ -10,11 +10,11 @@ const StyledButton = styled(UIButton)({
 });
 
 const Button = (props) => {
-  const { color, size, type, disabled, onClick, className, text, icon } = props;
+  const { color, size, variant, type, disabled, onClick, className, text, icon } = props;
 
   return (
     <StyledButton
-      variant="contained"
+      variant={variant || "contained"}
       color={color}
       size={size}
       type={type}

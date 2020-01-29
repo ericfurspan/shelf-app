@@ -25,6 +25,11 @@ export const addBookSuccess = book => ({
   type: ActionTypes.ADD_BOOK_SUCCESS,
   book,
 });
+export const updateBookStatusSuccess = (title, status) => ({
+  type: ActionTypes.UPDATE_BOOK_STATUS_SUCCESS,
+  title,
+  status,
+});
 export const trySearchBooks = () => ({
   type: ActionTypes.TRY_SEARCH_BOOKS,
 });
@@ -75,6 +80,10 @@ export const clearNotification = () => ({
 export const navigate = route => () => {
   history.push(route);
 };
+export const updateSearchTerm = searchTerm => ({
+  type: ActionTypes.UPDATE_SEARCH_TERM,
+  searchTerm,
+})
 
 
 // Stores the auth token in state and localStorage, and decodes and stores
@@ -161,10 +170,11 @@ export const getSavedBooks = () => async (dispatch, getState) => {
     );
 
     if (response.status !== 200) {
-      dispatch(apiError(response.status, 'Failed to retrieve Books'));
+      dispatch(apiError(response.status, 'Failed to fetch Books'));
+    } else {
+      const { books } = response.data;
+      dispatch(updateSavedBooks(books));  
     }
-    const { books } = response.data;
-    dispatch(updateSavedBooks(books));
   } catch (e) {
     dispatch(apiError(422, e.message));
   }
@@ -174,7 +184,6 @@ export const removeBook = book => async (dispatch, getState) => {
   dispatch(tryRemoveBook());
   try {
     const { token } = getState();
-
     await axios.delete(
       `${process.env.REACT_APP_API_BASE_URL}/users/books/${book.isbn}`,
       {
@@ -191,7 +200,7 @@ export const addBook = (book, shelfType) => async (dispatch, getState) => {
   dispatch(tryAddBook());
   try {
     const { token } = getState();
-    axios.post(
+    await axios.post(
       `${process.env.REACT_APP_API_BASE_URL}/users/books`,
       { ...book, shelf_type: shelfType },
       {
@@ -200,9 +209,28 @@ export const addBook = (book, shelfType) => async (dispatch, getState) => {
     );
     dispatch(addBookSuccess(book));
   } catch (e) {
-    dispatch(apiError(422, e.message));
+    const { data } = e.response;
+    dispatch(apiError(data.status, data.message));
   }
 };
+
+export const updateBookStatus = (book, newStatus) => async (dispatch, getState) => {
+  try {
+    const { token } = getState();
+    await axios.put(
+      `${process.env.REACT_APP_API_BASE_URL}/users/books/${book.isbn}/${newStatus}`,
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    dispatch(getSavedBooks());
+    dispatch(updateBookStatusSuccess(book.title, newStatus))
+  } catch(e) {
+    const { data } = e.response;
+    dispatch(apiError(data.status, data.message));
+  }
+}
 
 export const bookSearch = search => async (dispatch) => {
   dispatch(trySearchBooks());
