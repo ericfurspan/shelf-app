@@ -12,7 +12,7 @@ import Link from '@material-ui/core/Link';
 import { Form } from 'formik';
 import CustomButton from '../../components/Button';
 import Button from '@material-ui/core/Button';
-import Slide from '@material-ui/core/Slide';
+import Fade from '@material-ui/core/Fade';
 
 const styles = theme => ({
   card: {
@@ -31,7 +31,7 @@ const styles = theme => ({
     marginBottom: 12,
   },
   loginLink: {
-    margin: '36px auto',
+    margin: '24px auto',
     display: 'flex',
     justifyContent: 'center',
   },
@@ -50,9 +50,10 @@ const styles = theme => ({
   }
 });
 
-function RegisterForm(props) {
+const RegisterForm = props => {
   const {
-    values: { name, username, password },
+    classes,
+    values: { email, name, username, password },
     errors,
     touched,
     status,
@@ -69,11 +70,9 @@ function RegisterForm(props) {
     setFieldTouched(value, true, false);
   };
 
-  const { classes } = props;
-
   return (
     <>
-      <Slide direction="down" in timeout={750}>
+      <Fade in timeout={750}>
         <div className={classes.loginWrapper}>
           <Typography variant="subtitle1" color="secondary" align="center">Already have an account?</Typography>
           <Link component={RouterLink} to="/login">
@@ -88,8 +87,8 @@ function RegisterForm(props) {
             </Button>
           </Link>
         </div>
-      </Slide>
-      <Slide direction="down" in timeout={750}>
+      </Fade>
+      <Fade in timeout={750}>
         <Card className={classes.card}>
           <CardHeader className={classes.header} title="Sign Up" align="center" classes={{ title: classes.title }} />
           <CardContent>
@@ -100,6 +99,18 @@ function RegisterForm(props) {
               </div>
             )}
             <Form className={classes.form}>
+              <TextField
+                id="email-input"
+                name="email"
+                label="Email"
+                className={classes.textField}
+                helperText={touched.email ? errors.email : ''}
+                error={touched.email && Boolean(errors.email)}
+                onChange={e => change('email', e)}
+                value={email}
+                margin="normal"
+              />
+              <br />             
               <TextField
                 id="name-input"
                 name="name"
@@ -152,7 +163,7 @@ function RegisterForm(props) {
             </Form>
           </CardContent>
         </Card>
-      </Slide>
+      </Fade>
     </>
   );
 }

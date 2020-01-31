@@ -12,7 +12,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import CustomButton from '../../components/Button';
 import Button from '@material-ui/core/Button';
-import Slide from '@material-ui/core/Slide';
+import Fade from '@material-ui/core/Fade';
 
 const styles = theme => ({
   card: {
@@ -50,12 +50,17 @@ const styles = theme => ({
     alignItems: 'center',
     minWidth: 325,
     justifyContent: 'space-around',
+  },
+  forgot: {
+    display: 'flex',
+    justifyContent: 'center',
+    padding: 12,
   }
 });
 
-function LoginForm(props) {
+const LoginForm = props => {
   const {
-    values: { username, password },
+    values: { email, password },
     errors,
     touched,
     status,
@@ -75,7 +80,7 @@ function LoginForm(props) {
 
   return (
     <>
-      <Slide direction="down" in timeout={750}>
+      <Fade in timeout={750}>
         <div className={classes.signUpWrapper}>
           <Typography variant="subtitle1" color="secondary" align="center">Need an account?</Typography>
           <Link component={RouterLink} to="/register">
@@ -90,8 +95,8 @@ function LoginForm(props) {
             </Button>
           </Link>
         </div>
-      </Slide>
-      <Slide direction="down" in timeout={750}>
+      </Fade>
+      <Fade in timeout={750}>
         <Card className={classes.card}>
           <CardHeader className={classes.header} title="Login" align="center" color="primary" classes={{ title: classes.title }} />
           <CardContent>
@@ -103,15 +108,15 @@ function LoginForm(props) {
             )}
             <Form className={classes.form}>
               <TextField
-                id="username-input"
-                name="username"
-                label="Username"
-                helperText={touched.username ? errors.username : ''}
-                error={touched.username && Boolean(errors.username)}
+                id="email-input"
+                name="email"
+                label="Email"
+                helperText={touched.email ? errors.email : ''}
+                error={touched.email && Boolean(errors.email)}
                 className={classes.textField}
-                autoComplete="username"
-                value={username}
-                onChange={e => change('username', e)}
+                autoComplete="email"
+                value={email}
+                onChange={e => change('email', e)}
                 margin="normal"
               />
               <br />
@@ -141,8 +146,20 @@ function LoginForm(props) {
               </CardActions>
             </Form>
           </CardContent>
+          <div className={classes.forgot}>
+            <Link component={RouterLink} to="/forgotpassword">
+              <Button
+                variant='text'
+                color='primary'
+                type='button'
+                size='medium'
+              >
+                Forgot Password
+              </Button>
+            </Link>
+          </div>
         </Card>
-      </Slide>
+      </Fade>
     </>
   );
 }

@@ -10,6 +10,8 @@ import Library from './views/Library';
 import Login from './views/Login/Login';
 import Explore from './views/Explore';
 import Register from './views/Register/Register';
+import ForgotPassword from './views/Password/ForgotPassword';
+import ResetPassword from './views/Password/ResetPassword';
 import Notification from './components/Notification';
 import NavBar from './views/NavBar';
 import history from './history';
@@ -52,6 +54,8 @@ class AppRouter extends React.Component {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/explore" component={Explore} />
+          <Route exact path="/resetpassword/:token" component={ResetPassword} />
+          <Route path="/forgotpassword" component={ForgotPassword} />
           <ProtectedRoute isLoggedIn={isLoggedIn} path="/library" component={Library} />
           <Route path="/" render={() => <Redirect to="/library" />} />
         </Switch>

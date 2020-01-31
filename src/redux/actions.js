@@ -101,7 +101,7 @@ export const login = (fields, actions) => async (dispatch) => {
     const response = await axios.post(
       `${process.env.REACT_APP_API_BASE_URL}/auth/login`,
       JSON.stringify({
-        username: fields.username,
+        email: fields.email,
         password: fields.password,
       }),
       {
@@ -116,7 +116,7 @@ export const login = (fields, actions) => async (dispatch) => {
     console.log(e);
     const { status } = e.response;
     const message = status === 401
-      ? 'Incorrect username or password'
+      ? 'Incorrect email or password'
       : 'Unable to login, please try again';
     actions.setStatus(message);
     dispatch(authError(status, message));
@@ -138,6 +138,7 @@ export const registerUser = (fields, actions) => async (dispatch) => {
       JSON.stringify({
         firstName: fields.name.split(' ')[0],
         lastName: fields.name.split(' ')[1],
+        email: fields.email,
         username: fields.username,
         password: fields.password,
       }),

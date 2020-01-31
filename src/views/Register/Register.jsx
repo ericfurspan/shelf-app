@@ -17,10 +17,8 @@ const useStyles = makeStyles({
 });
 
 const validationSchema = Yup.object({
-  name: Yup.string('Enter your Name')
-    .required('Name is required'),
-  username: Yup.string('Enter your Username')
-    .required('Username is required'),
+  email: Yup.string('Enter your Email')
+    .required('Email is required'),
   password: Yup.string('Enter your Password')
     .min(6, 'Password must contain at least 6 characters')
     .required('Password is required'),
@@ -36,7 +34,7 @@ const Register = props => {
     const classes = useStyles();
 
     const initialValues = {
-      name: '', username: '', password: '',
+      name: '', email: '', username: '', password: '',
     };
 
   return (

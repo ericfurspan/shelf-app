@@ -1,7 +1,7 @@
 import React from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-const Spinner = () => (
+const Spinner = props => (
   <div style={{
       position: 'absolute',
       left: '50%',
@@ -10,7 +10,7 @@ const Spinner = () => (
       zIndex: 1000,
     }}
   >
-    <CircularProgress size={75} color="primary" />
+    <CircularProgress size={props.size || 75} color="primary" />
   </div>
 );
 
