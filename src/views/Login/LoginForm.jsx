@@ -42,14 +42,13 @@ const styles = theme => ({
     justifyContent: 'center'
   },
   signUpWrapper: {
-    position: 'absolute',
-    right: 12,
-    top: 12,
+    position: 'initial',
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center',
     minWidth: 325,
-    justifyContent: 'space-around',
+    justifyContent: 'flex-start',
+    marginTop: 24,
   },
   forgot: {
     display: 'flex',
@@ -80,22 +79,6 @@ const LoginForm = props => {
 
   return (
     <>
-      <Fade in timeout={750}>
-        <div className={classes.signUpWrapper}>
-          <Typography variant="subtitle1" color="secondary" align="center">Need an account?</Typography>
-          <Link component={RouterLink} to="/register">
-            <Button
-              variant="outlined"
-              color="secondary"
-              type='button'
-              size='large'
-              className={classes.signUpLink}
-            >
-              Sign Up
-            </Button>
-          </Link>
-        </div>
-      </Fade>
       <Fade in timeout={750}>
         <Card className={classes.card}>
           <CardHeader className={classes.header} title="Login" align="center" color="primary" classes={{ title: classes.title }} />
@@ -160,6 +143,22 @@ const LoginForm = props => {
           </div>
         </Card>
       </Fade>
+      <Fade in timeout={750}>
+        <div className={classes.signUpWrapper}>
+          <Typography variant="subtitle1" color="secondary" align="center">Need an account?</Typography>
+          <Link component={RouterLink} to="/register">
+            <Button
+              variant="outlined"
+              color="secondary"
+              type='button'
+              size='large'
+              className={classes.signUpLink}
+            >
+              Sign Up
+            </Button>
+          </Link>
+        </div>
+      </Fade>      
     </>
   );
 }

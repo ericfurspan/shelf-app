@@ -9,7 +9,7 @@ const Branding = () => (
     alignItems: 'center',
     backgroundColor: '#15202B',
     color: '#E9F0FE',
-    paddingTop: '2%',
+    paddingTop: '24px',
   }}>
     <Logo color="#E9F0FE" />
     <Typography variant="h3">Shelf</Typography><br />
